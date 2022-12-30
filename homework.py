@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass
-from typing import List, Dict, Type, ClassVar
+from typing import ClassVar, Dict, List, Type
 
 
 @dataclass
@@ -12,7 +12,7 @@ class InfoMessage:
     speed: float        # Средняя скорость (км/ч)
     calories: float     # Потрачено ккал
 
-    message: ClassVar[str] = (
+    MESSAGE: ClassVar[str] = (
         'Тип тренировки: {training_type};'
         ' Длительность: {duration:.3f} ч.;'
         ' Дистанция: {distance:.3f} км;'
@@ -21,7 +21,7 @@ class InfoMessage:
     )
 
     def get_message(self) -> str:
-        return self.message.format(**asdict(self))
+        return self.MESSAGE.format(**asdict(self))
 
 
 class Training:
@@ -50,7 +50,7 @@ class Training:
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        raise (NotImplementedError)
+        raise ValueError('Вы передали некорректное значение') 
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
@@ -67,9 +67,8 @@ class Running(Training):
     """Тренировка: бег."""
     CALORIES_MEAN_SPEED_MULTIPLIER: int = 18
     CALORIES_MEAN_SPEED_SHIFT: float = 1.79
-    M_IN_KM: int = 1000
 
-    def __init__(
+    def run(
         self,
         action: int,
         duration: float,
