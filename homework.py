@@ -50,7 +50,7 @@ class Training:
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        raise ValueError('Вы передали некорректное значение') 
+        raise ValueError('Вы передали некорректное значение')
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
